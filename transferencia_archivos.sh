@@ -39,16 +39,19 @@ echo "-----------------------------"
 # Si no se ha pasado ningún parámetro en la ejecución se solicita
 # confirmación para el borrado de archivos.
 if [ "$borrar_archivo" == "" ];then
-  read -p "¿Quieres eliminar los archivos finalizada la transferencia? (s/n)" borrar_archivo
+  read -p "¿Quieres eliminar los archivos finalizada la transferencia? (s/n) " borrar_archivo
 fi
 
-if [[ "$borrar_archivo" == 's' || "$borrar_archivo" == "-s" ]]; then
+if [[ "${borrar_archivo,,}" == 's' || "${borrar_archivo,,}" == "-s" ]]; then
   rm -r $origen/*
   echo "Eliminados todos los archivos de $origen"
   echo "Proceso finalizado"
   echo "-----------------------------"
-else
+elseif [[ "${borrar_archivo,,}" == 'n' || "${borrar_archivo,,}" == "-n" ]]; then
   echo "Proceso finalizado"
+  echo "-----------------------------"
+else
+  echo "Opción incorrecta. Proceso finalizado"
   echo "-----------------------------"
 fi
 
