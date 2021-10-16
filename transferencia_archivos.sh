@@ -32,7 +32,12 @@ error_exit(){
 
 echo "-----------------------------"
 echo "  Transfiriendo archivos...  "
-scp -r $origen $user@$host:/$destination || error_exit
+if [ $(ls $origen | wc -l) -gt 0 ]; then
+  scp -r $origen $user@$host:/$destination || error_exit
+else
+  echo "No hay archivos para transferir"
+  exit
+fi
 echo "  ...archivos transferidos  "
 echo "-----------------------------"
 
