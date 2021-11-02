@@ -82,19 +82,40 @@ function listar_maquinas(){
   echo "Máquinas listadas correctamente"
 }
 
+function comprobar_estado(){
+  local retval=$(vboxmanage showvminfo $1 | grep State | awk -F: '{ gsub(/ /,""); print $2 }' | awk -F"(" '{ print $1 }')
+  echo $retval
+}
+
 function arrancar_maquina(){
   echo "Arrancando la máquina $1"
-  vboxmanage startvm $1  --type=headless || error_exit "Error al iniciar la máquina virtual $1"
+  state=$(comprobar_estado $1)
+  if [ "$state" == "running" ]; then
+    echo "La máquina $1 ya está corriendo"
+  else
+    vboxmanage startvm $1  --type=headless || error_exit "Error al iniciar la máquina virtual $1"
+  fi
 }
 
 function guardar_maquina(){
   echo "Guardando el estado de la máquina $1" 
-  vboxmanage controlvm $1 savestate || error_exit "Error al guardar el estado de la máquina virtual $1"
-  echo "Estado guardado correctamente"
+  state=$(comprobar_estado $1)
+  if [ "$state" == "running" ]; then
+    vboxmanage controlvm $1 savestate || error_exit "Error al guardar el estado de la máquina virtual $1"
+    echo "Estado guardado correctamente"
+  else
+    echo "La máquina $1 no está corriendo"
+  fi
 }
 function apagar_maquina(){
   echo "Apagando la máquina $1"
-  vboxmanage controlvm $1 poweroff || error_exit "Error apagando la máquina virtual $1"
+  state=$(comprobar_estado $1)
+  if [ "$state" == "running" ]; then
+    vboxmanage controlvm $1 poweroff || error_exit "Error apagando la máquina virtual $1"
+    echo "Máquina apagada correctamente"
+  else
+    echo "La máquina $1 no está corriendo"
+  fi
 }
 
 echo "-----------------------------"
