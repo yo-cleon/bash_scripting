@@ -15,3 +15,7 @@ Para evitar el uso de contraseñas, requiere haber creado previamente una clave 
 ## vbox_manage.sh
 
 Script en bash para gestionar el uso de máquinas virtuales de VirtualBox, el uso de la interfaz de líneas de comandos VBoxManage. El script da la opción de listar las máquinas virtuales existentes, además de arrancar, parar y guardar el estado de una máquina virtual específica.
+
+## Backup configuración
+
+Script en bash para realizar un backup de los principales archivos de configuración de las aplicaciones instaladas en el pc
