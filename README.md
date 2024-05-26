@@ -20,3 +20,7 @@ Script en bash para gestionar el uso de máquinas virtuales de VirtualBox, el us
 ## backup_archivos_configuracion.sh 
 
 Script en bash para realizar un backup de los principales archivos de configuración de las aplicaciones instaladas en el pc
+
+## remove_white_spaces.sh
+
+Script en bash renombrar los archivos de un directorio sustituyendo los espacios en blanco por un caracter específicado
