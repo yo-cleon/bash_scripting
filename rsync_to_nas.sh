@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ####################################################################################
 ##                                                                                ##
 ##                             DESARROLLADO POR CLR                               ##
@@ -9,14 +11,13 @@
 ####################################################################################
 
 
-#!/bin/bash
-
 # put current date as yyyy-mm-dd HH:MM:SS in $date
 DIR_C3PO="/media/peter/C3PO"
 LOG_FILE="/var/log/rsync_to_nas.log"
 date=$(date '+%Y-%m-%d %H:%M:%S')
 
-function add_linea(){
+
+function add_linea() {
     echo "===================" >> $LOG_FILE
 }
 
